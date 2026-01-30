@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visual Edit Engine</title>
+
+<style>
+body {
+  background-color: #0b0b10;
+  font-family: Arial, sans-serif;
+  color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: #14141b;
+  padding: 30px;
+  border-radius: 18px;
+  width: 420px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.7);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 22px;
+}
+
+select, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #1f1f2a;
+  color: white;
+  font-size: 14px;
+}
+
+button {
+  background: linear-gradient(135deg,#6b5cff,#9d4edd);
+  cursor: pointer;
+  margin-top: 18px;
+}
+
+.result {
+  margin-top: 20px;
+  background: #101016;
+  padding: 15px;
+  border-radius: 12px;
+  display: none;
+  line-height: 1.6;
+}
+
+.label {
+  font-weight: bold;
+  color: #b4b4ff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Visual Edit Engine</h1>
+
+  <select id="tone">
+    <option value="">Select Tone</option>
+    <option>Serious</option>
+    <option>Luxury</option>
+    <option>Fun</option>
+    <option>Educational</option>
+    <option>Dramatic</option>
+  </select>
+
+  <select id="platform">
+    <option value="">Select Platform</option>
+    <option>Reels</option>
+    <option>Shorts</option>
+    <option>YouTube</option>
+  </select>
+
+  <select id="speed">
+    <option value="">Select Speed</option>
+    <option>Slow</option>
+    <option>Medium</option>
+    <option>Fast</option>
+  </select>
+
+  <button onclick="generate()">Generate Visual Idea</button>
+
+  <div class="result" id="output"></div>
+</div>
+
+<script>
+const tones = {
+  Serious:{
+    visual:"Dark gradient background with cinematic zoom",
+    motion:"Minimal parallax drift",
+    typo:"Bold white sans-serif",
+    pinterest:"dark cinematic motivational typography edit"
+  },
+  Luxury:{
+    visual:"Black marble texture with gold streaks",
+    motion:"Slow glow sweep",
+    typo:"Elegant gold serif font",
+    pinterest:"luxury gold typography animation"
+  },
+  Fun:{
+    visual:"Bright neon color background",
+    motion:"Bounce pop animation",
+    typo:"Rounded playful font",
+    pinterest:"fun colorful reel typography edit"
+  },
+  Educational:{
+    visual:"Clean white infographic board",
+    motion:"Slide reveal diagrams",
+    typo:"Modern minimal sans-serif",
+    pinterest:"educational infographic motion graphics"
+  },
+  Dramatic:{
+    visual:"Red smoke cinematic background",
+    motion:"Glitch zoom punches",
+    typo:"Condensed bold uppercase",
+    pinterest:"dramatic glitch cinematic edit"
+  }
+};
+
+const speeds={
+  Slow:"0-3 reveal | 4-7 float text | 8-12 fade out",
+  Medium:"0-2 hook | 3-6 emphasis | 7-10 close",
+  Fast:"0-1 flash | 2-4 punch text | 5-8 impact end"
+};
+
+function generate(){
+  const tone=document.getElementById("tone").value;
+  const platform=document.getElementById("platform").value;
+  const speed=document.getElementById("speed").value;
+  const out=document.getElementById("output");
+
+  if(!tone || !platform || !speed){
+    out.style.display="block";
+    out.innerHTML="Please select all options.";
+    return;
+  }
+
+  const t=tones[tone];
+  const timing=speeds[speed];
+
+  out.style.display="block";
+  out.innerHTML=`
+  <div><span class="label">Visual:</span> ${t.visual}</div>
+  <div><span class="label">Motion:</span> ${t.motion}</div>
+  <div><span class="label">Typography:</span> ${t.typo}</div>
+  <div><span class="label">Timing:</span> ${timing}</div>
+  <div><span class="label">Pinterest Search:</span> ${t.pinterest} ${platform.toLowerCase()}</div>
+  `;
+}
+</script>
+
+</body>
+</html>
